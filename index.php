@@ -5,17 +5,17 @@
    Crée le : 28.01.2021
    Mis a jour le : 28.01.2021
 -->
+<?php
+include 'Fonctions.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <title>cfpt-facebook-Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <link href="assets/css/facebook.css" rel="stylesheet">
     </head>
     
@@ -42,15 +42,14 @@
 							  <a href="#" class="navbar-brand logo">b</a>
 							</div>
 							<nav class="collapse navbar-collapse" role="navigation">							
-							<ul class="nav navbar-nav">
-							  <li>
-								<a href="index.php"><i class="glyphicon glyphicon-home"></i> Home</a>
-							  </li>
-							  <li>
-								<a href="Post.php"><i class="glyphicon glyphicon-plus"></i> Post</a>
-                </li>
-              </ul>
-
+								<ul class="nav navbar-nav">
+									<li>
+										<a href="index.php"><i class="glyphicon glyphicon-home"></i> Home</a>
+									</li>
+									<li>
+										<a href="Post.php"><i class="glyphicon glyphicon-plus"></i>Post</a>
+									</li>
+								</ul>
 							</nav>
 						</div>
 						<!-- /top nav -->
@@ -77,7 +76,7 @@
 								  
 								  <!-- main col right -->
 								  <div class="col-sm-7">
-                  <h1>Welcome</h1> 
+                  					<h1>Welcome</h1> 
 							   </div><!--/row-->
 							</div><!-- /col-9 -->
 						</div><!-- /padding -->

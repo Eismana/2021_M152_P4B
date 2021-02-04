@@ -5,18 +5,18 @@
    Crée le : 28.01.2021
    Mis a jour le : 28.01.2021
 -->
+<?php
+include 'Fonctions.php';
 
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
         <title>cfpt-facebook-Post</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <link href="assets/css/facebook.css" rel="stylesheet">
     </head>
     
@@ -28,7 +28,7 @@
 					
 					
 				  
-					<!-- main right col -->
+					<!-- main-->
 					<div class="column col-sm-12 col-xs-12" id="main">
 						
 						<!-- top nav -->
@@ -55,9 +55,37 @@
 							</nav>
 						</div>
 						<!-- /top nav -->
-					  
-						
+					  	<!-- Un modal dialogue avec un qui qui permet d'écrire dans la textarea et de selctioner plusieurs images -->
+						<div class="modal-dialog" style="margin-top: 30px";>
+						<div class="modal-content">
+							<div class="modal-header">
+									<b>Share</b>
+							</div>
+							<div class="modal-body">
+								<form class="form center-block">
+									<div class="form-group">
+									<textarea class="form-control input-lg" autofocus placeholder="Commentaire ?"></textarea>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<div>
+								<form>
+									<div class="form-group" action="index.php">
+										<input type="file" multiple accept="image/*"  class="form-control-file" id="FormUpload"  style="float:left">
+													<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true" >Post</button>
+									</div>
+									</form>
+					
+								
+								</div>	
+						</div>
+					</div>
+		  		
+			</div>
+			<!-- /Un modal dialogue avec un qui qui permet d'écrire dans la textarea et de selctioner plusieurs images -->
 		</div>
+		<!-- /main-->
 
 
 
