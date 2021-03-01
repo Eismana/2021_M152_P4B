@@ -7,6 +7,8 @@
 -->
 <?php
 include 'Fonctions.php';
+
+showPosts();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,15 +20,10 @@ include 'Fonctions.php';
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="assets/css/facebook.css" rel="stylesheet">
     </head>
-    
     <body>
-        
         <div class="wrapper">
 			<div class="box">
 				<div class="row row-offcanvas row-offcanvas-left">
-					
-					
-				  
 					<!-- main right col -->
 					<div class="column col-sm-12 col-xs-12" id="main">
 						
