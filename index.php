@@ -8,7 +8,6 @@
 <?php
 include 'Fonctions.php';
 
-showPosts();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -61,7 +60,7 @@ showPosts();
 								 <div class="col-sm-5">
                  
 									  <div class="panel panel-default" style="max-width:200px;">
-										<div class="panel-thumbnail"  ><img src="assets/img/bg_5.jpg" class="img-responsive" width="200x"></div>
+										<div class="panel-thumbnail"><img src="assets/img/bg_5.jpg" class="img-responsive" width="200x"></div>
 										<div class="panel-body ">
 										  <p class="lead">Jean</p>
 										  <p>
@@ -74,6 +73,7 @@ showPosts();
 								  <!-- main col right -->
 								  <div class="col-sm-7">
                   					<h1>Welcome</h1> 
+									  <?php ShowPost(); ?>
 							   </div><!--/row-->
 							</div><!-- /col-9 -->
 						</div><!-- /padding -->

@@ -7,6 +7,51 @@
 -->
 <?php
 include 'Fonctions.php';
+
+$maxSize = 7000000;
+$maxSizePerFile = 3000000;
+
+$time = time();
+//Quand submit existe
+if (isset($_POST["submit"])) {
+	$files = $_FILES['mesfichiers'];
+	if ($_POST['Commentaire']) {
+		echo "lol";
+		$id = InsertPost($_POST['Commentaire']);
+	}
+	
+	if (count($files['name']) >= 1 && $files['name'] != "") {
+		//9
+		for ($i = 0; $i < count($files['name']); $i++) {
+			//3 5
+			var_dump($files);
+			$totalSize = 0;
+			$size = $files["size"][$i];
+			$files["name"][$i] = $time . "_" . $files["name"][$i];
+			if ($size <= $maxSizePerFile && preg_match('#image#', $files['type'][$i]) && $totalSize <= $maxSize) {
+				// 4 a remplacer avec img pour la destination
+				if (move_uploaded_file($files['tmp_name'][$i], '../img/' . $files["name"][$i])) {
+					
+					if (isset($id)) {
+						
+					InsertMedia($files['type'][$i], $files['name'][$i], $id);
+
+
+					echo '<p>';
+					echo 'Fichier ' . $files['name'][$i] . ' reçu';
+					echo '<br>';
+					echo 'Type ' . $files['type'][$i];
+					echo '<br>';
+					echo 'Taille ' . $files['size'][$i] . ' octets';
+					}
+				}
+			} else {
+				echo 'Fichier trop lourd !';
+			}
+			$totalSize += $files['size'][$i];
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,40 +120,6 @@ include 'Fonctions.php';
 											<input type="file" multiple accept="image/jpeg,image/png,image/gif" class="form-control-file" name="mesfichiers[]" style="float:left;">
 											<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true" type="submit" name="submit">Post</button>
 										</div>
-										<?php
-										//Quand submit existe
-										if (isset($_POST["submit"])) {
-											$files = $_FILES['mesfichiers'];
-											if (count($files['name']) >= 1 && $files['name'] != "") {
-												//9
-												for ($i = 0; $i < count($files['name']); $i++) {
-													//3 5
-													$size = $files["size"][$i];
-													$time = time();
-													$files["name"][$i] = $time . "_" . $files["name"][$i];
-													if ($size <= 3000000 && preg_match('#image#', $files['type'][$i])) {
-														// 4 a remplacer avec img pour la destination
-														if (move_uploaded_file($files['tmp_name'][$i], '../img/' . $files["name"][$i])) {
-															//6
-															$id = InsertPost($_POST['Commentaire'], $time);
-															InsertMedia($files['type'][$i], $files['name'][$i], $time, $id);
-
-
-															echo '<p>';
-															echo 'Fichier ' . $fichiers['name'][$i] . ' reçu';
-															echo '<br>';
-															echo 'Type ' . $fichiers['type'][$i];
-															echo '<br>';
-															echo 'Taille ' . $fichiers['size'][$i] . ' octets';
-														}
-													}
-													else{
-														echo'Fichier trop lourd !';
-													}
-												}
-											}
-										}
-										?>
 									</div>
 
 								</div>
