@@ -3,7 +3,7 @@
    Nom du projet: facebook-cfpt
    Auteur : Eisman Camara Abel
    Crée le : 28.01.2021
-   Mis a jour le : 28.01.2021
+   Mis a jour le : 22.03.2021
 -->
 <?php
 include 'Fonctions.php';
@@ -15,11 +15,11 @@ $time = time();
 //Quand submit existe
 if (isset($_POST["submit"])) {
 	$files = $_FILES['mesfichiers'];
-	if ($_POST['Commentaire']) {
-		echo "lol";
-		$id = InsertPost($_POST['Commentaire']);
+	if ($_POST['Commentaire'] && count($files) < 1) {
+		
+		InsertPost($_POST['Commentaire']);
 	}
-	
+
 	if (count($files['name']) >= 1 && $files['name'] != "") {
 		//9
 		for ($i = 0; $i < count($files['name']); $i++) {
@@ -31,19 +31,13 @@ if (isset($_POST["submit"])) {
 			if ($size <= $maxSizePerFile && preg_match('#image#', $files['type'][$i]) && $totalSize <= $maxSize) {
 				// 4 a remplacer avec img pour la destination
 				if (move_uploaded_file($files['tmp_name'][$i], '../img/' . $files["name"][$i])) {
-					
-					if (isset($id)) {
+
+						InsertPostMedia($_POST['Commentaire'], $files['type'][$i], $files['name'][$i]);
+
 						
-					InsertMedia($files['type'][$i], $files['name'][$i], $id);
-
-
-					echo '<p>';
-					echo 'Fichier ' . $files['name'][$i] . ' reçu';
-					echo '<br>';
-					echo 'Type ' . $files['type'][$i];
-					echo '<br>';
-					echo 'Taille ' . $files['size'][$i] . ' octets';
-					}
+				}
+				else{
+					echo 'Tout les fichiers non pas été transférés.';
 				}
 			} else {
 				echo 'Fichier trop lourd !';

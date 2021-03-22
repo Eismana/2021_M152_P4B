@@ -1,3 +1,10 @@
+<!--
+   Fonctions.php
+   Nom du projet: facebook-cfpt
+   Auteur : Eisman Camara Abel
+   Crée le : 28.01.2021
+   Mis a jour le : 22.03.2021
+-->
 <?php
 //Connection à la base de données
 function Connection()
@@ -63,6 +70,36 @@ function InsertMedia($typeMedia, $nomMedia, $lastId)
         echo "Failed: " . $e->getMessage();
     }
 }
+
+function InsertPostMedia($commentaire, $typeMedia, $nomMedia)
+{
+    $dbh = Connection();
+    $dbh->beginTransaction();
+    try {
+        $sql = "INSERT INTO `post` (`commentaire`) VALUES (:commentaire)";
+        $query = $dbh->prepare($sql);
+        $query->execute(array(
+            ':commentaire' => $commentaire,
+        ));
+        $lastest_id = $dbh->lastInsertID();
+
+        $sql = "INSERT INTO `media`(`typeMedia`,`nomMedia`,`idPost`)
+        VALUES (:typeMedia, :nomMedia, :lastId)";
+        $query = $dbh->prepare($sql);
+        $query->execute([
+            'typeMedia' => $typeMedia,
+            'nomMedia' => $nomMedia,
+            'lastId' => $lastest_id,
+        ]);
+        $dbh->commit();
+    } catch (Exception $e) {
+        $dbh->rollBack();
+        echo "Failed: " . $e->getMessage();
+    }
+}
+
+
+
 function SelectPost()
 {
     $dbh = Connection();
@@ -88,19 +125,28 @@ function ShowPost()
     $posts = SelectPost();
 
     foreach ($posts as $post => $value) {
+
         $medias = SelectMedia($value['idPost']);
         echo '<div class="col-sm-5">
                  
     <div class="panel panel-default" style="max-width:200px;">
-      <div class="panel-thumbnail"><img src="../img/' . $medias['nomMedia'] . '" class="img-responsive" width="200x"></div>
+      <div class="panel-thumbnail"><img src="../img/' . $medias[0]['nomMedia'] . '" class="img-responsive" width="200x"></div>
       <div class="panel-body ">
-        <p class="lead">Jean</p>
+        <b>' .$medias[0]['nomMedia']. '</b>
         <p>
           <img src="assets/img/uFp_tsTJboUY7kue5XAsGAs28.png" height="28px" width="28px">
         </p>
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+</button>
+<button type="button" class="btn btn-default" aria-label="Left Align" style="margin-left:41px;">
+<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+</button>
+
       </div>
     </div>
 </div>
 ';
+     
     }
 }
