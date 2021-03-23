@@ -127,19 +127,22 @@ function ShowPost()
     foreach ($posts as $post => $value) {
 
         $medias = SelectMedia($value['idPost']);
+        if(preg_match('/image\/*/', $medias[0]['typeMedia'])) {
+            
         echo '<div class="col-sm-5">
-                 
-    <div class="panel panel-default" style="max-width:200px;">
-      <div class="panel-thumbnail"><img src="../img/' . $medias[0]['nomMedia'] . '" class="img-responsive" width="200x"></div>
+        <div class="panel panel-default" style="max-width:200px;">
+      <div class="panel-thumbnail"><img src="../medias/' . $medias[0]['nomMedia'] . '" class="img-responsive" width="200x"></div>
       <div class="panel-body ">
         <b>' .$medias[0]['nomMedia']. '</b>
+        
         <p>
           <img src="assets/img/uFp_tsTJboUY7kue5XAsGAs28.png" height="28px" width="28px">
+          
         </p>
         <button type="button" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 </button>
-<button type="button" class="btn btn-default" aria-label="Left Align" style="margin-left:41px;">
+<button type="button" class="btn btn-default" aria-label="Left Align">
 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 </button>
 
@@ -147,6 +150,28 @@ function ShowPost()
     </div>
 </div>
 ';
-     
+          }
+
+else if(preg_match('/video\/*/', $medias[0]['typeMedia'])) {
+    echo '<div class="col-sm-5">
+    <div class="panel panel-default" style="max-width:200px;">
+  <div class="panel-thumbnail"><video class="img-responsive" width="200x" controls autoplay loop><source src="../medias/' . $medias[0]['nomMedia'] . '" type="'.$medias[0]['typeMedia'].'"></video></div>
+  <div class="panel-body ">
+    <b>' .$medias[0]['nomMedia']. '</b>
+    <p>
+      <img src="assets/img/uFp_tsTJboUY7kue5XAsGAs28.png" height="28px" width="28px">
+    </p>
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+</button>
+<button type="button" class="btn btn-default" aria-label="Left Align"">
+<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+</button>
+
+  </div>
+</div>
+</div>
+';
+  }
     }
 }
