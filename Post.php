@@ -3,7 +3,7 @@
    Nom du projet: facebook-cfpt
    Auteur : Eisman Camara Abel
    Crée le : 28.01.2021
-   Mis a jour le : 22.03.2021
+   Mis a jour le : 23.03.2021
 -->
 <?php
 include 'Fonctions.php';
@@ -28,8 +28,8 @@ if (isset($_POST["submit"])) {
 			$totalSize = 0;
 			$size = $files["size"][$i];
 			$files["name"][$i] = $time . "_" . $files["name"][$i];
-			if ($size <= $maxSizePerFile && preg_match('/image\/*/', $files['type'][$i]) || preg_match('/video\/*/', $files['type'][$i]) && $totalSize <= $maxSize) {
-				// 4 a remplacer avec img pour la destination
+			if ($size <= $maxSizePerFile && preg_match('/image\/*/', $files['type'][$i]) || preg_match('/video\/*/', $files['type'][$i])|| preg_match('/audio\/*/', $files['type'][$i]) && $totalSize <= $maxSize) {
+				// 4 a remplacer avec medias pour la destination
 				if (move_uploaded_file($files['tmp_name'][$i], '../medias/' . $files["name"][$i])) {
 
 						InsertPostMedia($_POST['Commentaire'], $files['type'][$i], $files['name'][$i]);
@@ -111,7 +111,7 @@ if (isset($_POST["submit"])) {
 									<div>
 										<div class="form-group" action="index.php">
 											<!--7 8-->
-											<input type="file" multiple accept="image/jpeg,image/png,image/gif/mp4,video/x-m4v,video/*" class="form-control-file" name="mesfichiers[]" style="float:left;">
+											<input type="file" multiple accept="image/*,audio/*,video/*" class="form-control-file" name="mesfichiers[]" style="float:left;">
 											<button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true" type="submit" name="submit">Post</button>
 										</div>
 									</div>
